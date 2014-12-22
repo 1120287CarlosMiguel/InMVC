@@ -21,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -99,19 +147,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-756657421"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-104382150"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-756657421" class="accordion-body collapse in">
+            <div id="namespace-104382150" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2038138690"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-54412225"></a>
                                 <a href="../namespaces/Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
             </div>
-            <div id="namespace-2038138690" class="accordion-body collapse ">
+            <div id="namespace-54412225" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -129,10 +177,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-224924824"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1020831407"></a>
                                 <a href="../namespaces/Core.html" style="margin-left: 30px; padding-left: 0">Core</a>
             </div>
-            <div id="namespace-224924824" class="accordion-body collapse ">
+            <div id="namespace-1020831407" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -150,10 +198,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1426756745"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1566821694"></a>
                                 <a href="../namespaces/Helpers.html" style="margin-left: 30px; padding-left: 0">Helpers</a>
             </div>
-            <div id="namespace-1426756745" class="accordion-body collapse ">
+            <div id="namespace-1566821694" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -168,10 +216,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1300757514"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-169867779"></a>
                                 <a href="../namespaces/Model.html" style="margin-left: 30px; padding-left: 0">Model</a>
             </div>
-            <div id="namespace-1300757514" class="accordion-body collapse ">
+            <div id="namespace-169867779" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -196,40 +244,136 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content namespace">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/default.html">\</a>
-                                            </nav>
-                    <h1><small>\</small>Model</h1>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small></small>index.php</h1>
+                    <p><em></em></p>
+                    
 
                     
                     
-                    
-                                        <h2>Classes</h2>
-                    <table class="table table-hover">
-                                            <tr>
-                            <td><a href="../classes/Model.Posts.html">Posts</a></td>
-                            <td><em>Model Class</em></td>
-                        </tr>
-                                        </table>
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                        <dt>Namespace hierarchy</dt>
-                        <dd class="hierarchy">
-                                                                                                                                                                                                                                                                
-                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
-                                                                                        <div class="namespace-wrapper">\Model</div>
-                        </dd>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
                     </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                            </table>
+
                 </aside>
             </div>
 
-            
-            
+                        <div class="row-fluid">
+                <section class="span8 content file">
+                    <h2>Constants</h2>
+                </section>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_START_TIME" name="constant_START_TIME" class="anchor"></a>
+            <article id="constant_START_TIME" class="constant">
+                <h3 class="">START_TIME</h3>
+                <pre class="signature">START_TIME</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                <dt>File</dt>
+                <dd><a href=""><div class="path-wrapper">www\index.php</div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            package
+                        </th>
+                        <td>
+                                                            <p>Default</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                        <div class="row-fluid">
+                <section class="span8 content file">
+                    <h2>Functions</h2>
+                </section>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_autoLoad" name="method_autoLoad" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">autoLoad()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">autoLoad(string  <span class="argument">$className</span>) </pre>
+                <p><em>Auto Load Function</em></p>
+                <p>This function is able to Auto Load the necessary
+classes that are inside the library folder.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$className </td>
+                                <td><p>The name of the unknown class.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                    <dt>File</dt>
+                    <dd><a href=""><div class="path-wrapper">www\index.php</div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            package
+                        </th>
+                        <td>
+                                                                                            <p>Default</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
         </div>
     </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/www\index.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
